@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 設置 -->
+    <canvas width="600" height="600"></canvas>
+
+    <script>
+        // 先選擇
+        let canvas = document.querySelector('canvas')
+        // 一定要設置 2D
+        let context = canvas.getContext('2d')
+
+        // 畫顏色
+        context.fillStyle = 'blue'
+        // fillRect() 畫矩形 設置 x,y,width, height
+        // context.fillRect(100, 100, 400, 400)
+
+        // lineWidth 很像 border
+        context.lineWidth = 4
+        // 自訂圖形要從這邊開始
+        context.beginPath()
+        context.rect(100,100,400,400)
+        // context.stroke()
+
+        context.beginPath()
+        // 這邊可以再 W3C 找到           2PI = 360deg
+        context.arc(300, 300 , 100, 0 , Math.PI * 2)
+
+        const width = 60
+        const height = 60
+        const gap = 20
+        let x , y
+
+        // 巢狀會得到平面的圖案
+        for (let i = 0; i < 5; i++) {
+            for (let j = 0; j < 5; j++) {
+                
+                let x = 100 + (width + gap) * i
+                let y = 100 + (height + gap) * j
+                // 畫 5 個連續的正方形
+                context.beginPath()
+                context.rect( x, y , width, height )
+                context.stroke()
+
+                // Math.random() 產出 0 ~ 1 之間的參數，如果大於 0.5 就會出現小框框
+                if (Math.random() > 0.5) {
+                    // 在一個小的正方形在內
+                    context.beginPath()
+                    // 因為 x y 各加 8 所以寬和高都要減去 8 的兩倍 框框才會再正方形內
+                    context.rect( x + 8 , y + 8, width -16, height -16)
+                    context.stroke()
+                }
+            }
+        }
+        
+
+
+
+    </script>
+</body>
+</html>
